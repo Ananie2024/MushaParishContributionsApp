@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.mushaParish.controllers.ContributionSummaryController">
+    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+    
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="AMATURO YOSE" />
+    
+    <!-- Year Filter -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Umwaka:" style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="yearFilterComboBox" promptText="Hitamo umwaka" />
+        <Button fx:id="refreshSummaryButton" text="Refresh" />
+        <Button fx:id="showAllYearsButton" text="Imyaka yose" />
+    </HBox>
+    
+    <!-- SubParish Filter for BEC Details -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Santarali:" style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="subParishFilterComboBox" promptText="Hitamo santarali " />
+        <Button fx:id="clearSubParishFilterButton" text="Siba" />
+    </HBox>
+    
+    <Separator />
+    
+    <!-- Summary Content -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <VBox fx:id="summaryContentVBox" spacing="15">
+            <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+            
+            <!-- Overall Total -->
+            <VBox spacing="5" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-border-color: #dee2e6; -fx-border-radius: 5;">
+                <Label fx:id="overallTotalTitleLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #495057;" text="IGITERANYO RUSANGE" />
+                <Label fx:id="overallTotalAmountLabel" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #28a745;" text="0 RWF" />
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Dynamic Summary Section -->
+            <VBox fx:id="dynamicSummaryVBox" spacing="10">
+                <Label fx:id="summaryTitleLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #495057;" text="IGITERANYO KU SANTARALI:" />
+                <!-- Sub-parish or BEC summaries will be added here dynamically -->
+            </VBox>
+        </VBox>
+    </ScrollPane>
+    
+    <!-- Close Button -->
+    <HBox alignment="CENTER">
+        <Button fx:id="closeButton" text="Funga" style="-fx-font-size: 14px; -fx-padding: 10 20 10 20;" />
+    </HBox>
+</VBox>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="rootPane" alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.mushaParish.controllers.FaithfulContributionsManagerController"> 
+    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+    
+    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="Abakristu n'amaturo yabo" />
+    
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button fx:id="homeButton" mnemonicParsing="false" text="AHABANZA" />
+        <Button fx:id="showSummaryButton" mnemonicParsing="false" text="IBITERANYO BY'AMATURO" />
+        <Button fx:id="overallSummaryButton" mnemonicParsing="false" text="IMBONERAHAMWE Y'AMATURO" />
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Santarali" />
+        <ComboBox fx:id="filterSubParishComboBox" promptText="Hitamo Santarali" />
+        <Label text="Impuza" />
+        <ComboBox fx:id="filterBecComboBox" promptText="hitamo impuza" />
+        <TextField fx:id="searchFaithfulTextField" promptText="shakisha ushyiramo amazina" HBox.hgrow="ALWAYS" />
+        <Button fx:id="clearFiltersButton" text="Siba" />
+    </HBox>
+
+    <SplitPane dividerPositions="0.4023746701846966" VBox.vgrow="ALWAYS">
+        <VBox alignment="TOP_CENTER" spacing="10">
+            <Label style="-fx-font-weight: bold;" text="Abakristu" />
+            <TableView fx:id="faithfulsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="faithfulNameCol" prefWidth="179.0" text="Amazina" />
+                    <TableColumn fx:id="faithfulBecCol" prefWidth="108.0" text="Impuza" />
+                    <TableColumn fx:id="faithfulSubParishCol" prefWidth="94.0" text="Santarali" />
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="addNewFaithfulBtn" text="Ongeraho undi mushya" />
+                <Button fx:id="editFaithfulBtn" text="Edit" />
+                <Button fx:id="deleteFaithfulBtn" text="Siba" />
+            </HBox>
+        </VBox>
+
+        <VBox fx:id="faithFulContributionDetails" alignment="TOP_CENTER" spacing="10" style="-fx-padding: 0 0 0 10;">
+            <Label style="-fx-font-weight: bold;" text="Umwirondoro we" />
+            <GridPane hgap="10" vgap="5">
+                <columnConstraints>
+                    <ColumnConstraints maxWidth="257.0" minWidth="106.0" prefWidth="161.0" />
+                    <ColumnConstraints maxWidth="430.0" minWidth="173.0" prefWidth="389.0" />
+                </columnConstraints>
+                <Label text="Amazina" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="detailNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Telefone" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="detailContactLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="detailAddressLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Impuza" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label fx:id="detailBecLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Santarali" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="detailSubParishLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label maxWidth="-Infinity" prefHeight="16.0" prefWidth="188.0" text="Umwaka yabatijwemo" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label fx:id="detailBaptismYearLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label text="Icyo akora" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <Label fx:id="detailOccupationLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <rowConstraints>
+                   <RowConstraints />
+                   <RowConstraints />
+                   <RowConstraints />
+                   <RowConstraints />
+                   <RowConstraints />
+                   <RowConstraints />
+                   <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+
+            <Separator />
+
+            <Label style="-fx-font-weight: bold;" text="Amaturo ye" />
+            <TableView fx:id="contributionsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="contributionYearCol" prefWidth="142.0" text="umwaka" />
+                    <TableColumn fx:id="contributionAmountCol" prefWidth="165.0" text="Ituro(RWF)" />
+                    <TableColumn fx:id="contributionDateCol" prefWidth="137.0" text="Itariki" />
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="addContributionForSelectedBtn" text="Ongeraho ituro" />
+                <Button fx:id="editContributionBtn" text="Edit" />
+                <Button fx:id="deleteContributionBtn" text="Siba" />
+            <Button fx:id="generatePDFBtn1" mnemonicParsing="false" text="Hindura PDF" />
+            </HBox>
+        </VBox>
+    </SplitPane>
+</VBox>

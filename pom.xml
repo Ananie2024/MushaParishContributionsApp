@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.ananie</groupId>
+  <artifactId>MushaParishContributionsApp</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+    
+  <properties>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <spring.version>6.1.6</spring.version>
+    <javafx.version>17</javafx.version>
+    <h2.version>2.2.224</h2.version>
+    <main.class>org.ananie.mushaParish.main.MainApp</main.class>
+    <app.name>MushaParishApp</app.name>
+    <app.version>1.0.0</app.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jpackage.plugin.version>1.6.5</jpackage.plugin.version>
+  </properties>
+
+  <dependencies>
+  
+    <dependency>
+      <groupId>jakarta.transaction</groupId>
+      <artifactId>jakarta.transaction-api</artifactId>
+      <version>2.0.0</version>
+    </dependency>  
+     
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>3.2.6</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.4.4.Final</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+          <version>5.1.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        
+        <dependency>
+         <groupId>jakarta.validation</groupId>
+         <artifactId>jakarta.validation-api</artifactId>
+         <version>3.0.2</version>
+        </dependency>
+        
+        <dependency>
+         <groupId>org.hibernate.validator</groupId>
+         <artifactId>hibernate-validator</artifactId>
+         <version>8.0.1.Final</version>
+        </dependency>
+        
+        <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.38</version>
+          <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version> 
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>5.0.0-M1</version>
+        </dependency>
+        
+        <dependency>
+           <groupId>com.itextpdf</groupId>
+           <artifactId>itextpdf</artifactId>
+           <version>5.5.13.3</version> 
+        </dependency>
+
+        <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>itext-asian</artifactId>
+          <version>5.2.0</version> 
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.19</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.9.19</version>
+        </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+                
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${app.name}-${app.version}-fat</finalName>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${main.class}</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.tooling</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.factories</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>module-info.class</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>windows</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>${jpackage.plugin.version}</version>
+            <executions>
+              <execution>
+                <id>windows-package</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jpackage</goal>
+                </goals>
+                <configuration>
+                  <type>EXE</type>
+                  <name>${app.name}</name>
+                  <appVersion>${app.version}</appVersion>
+                   <jlink>false</jlink>
+                  <vendor>Ananie Musha Parish</vendor>
+                  <destination>target/dist</destination>
+                  <input>target</input>
+                  <mainJar>${app.name}-${app.version}-fat.jar</mainJar>
+                  <mainClass>${main.class}</mainClass>
+                 
+                                   
+                <runtimeImage>/usr/lib/jvm/bellsoft-java17-full-amd64</runtimeImage>
+                                                     
+               
+				  <javaOptions>
+				    <option>-Dfile.encoding=UTF-8</option>
+				    <option>-Djava.awt.headless=false</option>
+				  </javaOptions>
+                                   
+                  <winMenu>true</winMenu>
+                  <winDirChooser>true</winDirChooser>
+                  <winShortcut>true</winShortcut>
+                  <winPerUserInstall>false</winPerUserInstall>
+                  <description>Musha Parish Contributions Management System</description>
+                  <copyright>2025 Ananie Musha Parish</copyright>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>windows-zip</id>
+      <properties>
+        <!-- Use Bellsoft Liberica JRE which includes JavaFX -->
+        <windows.jre.url>https://download.bell-sw.com/java/17.0.12+10/bellsoft-jre17.0.12+10-windows-amd64-full.zip</windows.jre.url>
+        <windows.jre.filename>bellsoft-jre-windows-full.zip</windows.jre.filename>
+      </properties>
+      <build>
+        <plugins>
+          <!-- Download Windows JRE -->
+          <plugin>
+            <groupId>com.googlecode.maven-download-plugin</groupId>
+            <artifactId>download-maven-plugin</artifactId>
+            <version>1.9.0</version>
+            <executions>
+              <execution>
+                <id>download-windows-jre</id>
+                <phase>generate-resources</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>${windows.jre.url}</url>
+                  <outputDirectory>target</outputDirectory>
+                  <outputFileName>${windows.jre.filename}</outputFileName>
+                  <skipCache>false</skipCache>
+                  <retries>10</retries>
+                  <readTimeOut>130000</readTimeOut>
+                  <connectTimeout>60000</connectTimeout>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.6.1</version>
+            <executions>
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>target/windows-zip/lib</outputDirectory>
+                  <includeScope>runtime</includeScope>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>create-windows-package</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <!-- Create directory structure -->
+                    <mkdir dir="target/windows-zip/bin"/>
+                    <mkdir dir="target/windows-zip/lib"/>
+                    <mkdir dir="target/windows-zip/config"/>
+                    
+                    <!-- Extract Windows JRE -->
+                    <echo message="Extracting Windows JRE from: ${windows.jre.filename}"/>
+                    <unzip src="target/${windows.jre.filename}" dest="target/windows-zip/jre"/>
+                    
+                    <!-- Copy the fat jar -->
+                    <copy file="target/${app.name}-${app.version}-fat.jar" todir="target/windows-zip/lib"/>
+                    
+                    <!-- Create Windows batch script with bundled JRE and JavaFX -->
+                    <echo file="target/windows-zip/bin/${app.name}.bat" message="@echo off${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="cd /d &quot;%~dp0..&quot;${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="set JAVA_HOME=%cd%\jre${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="set PATH=%JAVA_HOME%\bin;%PATH%${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="echo Using Java from: %JAVA_HOME%${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="if not exist &quot;%JAVA_HOME%\bin\java.exe&quot; (${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    echo ERROR: Java executable not found at %JAVA_HOME%\bin\java.exe${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    echo Please check if the JRE folder was extracted properly.${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    pause${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    exit /b 1${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message=")${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="echo Starting JavaFX application...${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="&quot;%JAVA_HOME%\bin\java.exe&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base --add-opens javafx.fxml/javafx.fxml=ALL-UNNAMED -Dfile.encoding=UTF-8 -Djava.awt.headless=false -cp &quot;lib/*&quot; ${main.class}${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="if errorlevel 1 (${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    echo Application failed to start. Press any key to exit.${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    pause${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message=") else (${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    echo Application finished successfully.${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message="    pause${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.bat" append="true" message=")${line.separator}"/>
+                    
+                    <!-- Create PowerShell script with bundled JRE and JavaFX -->
+                    <echo file="target/windows-zip/bin/${app.name}.ps1" message="Set-Location -Path (Split-Path -Parent $MyInvocation.MyCommand.Path)${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.ps1" append="true" message="Set-Location -Path '..'${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.ps1" append="true" message="$env:JAVA_HOME = Join-Path (Get-Location) 'jre'${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.ps1" append="true" message="$env:PATH = &quot;$env:JAVA_HOME\bin;$env:PATH&quot;${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.ps1" append="true" message="Write-Host &quot;Starting JavaFX application with bundled JRE...&quot;${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}.ps1" append="true" message="&amp; &quot;$env:JAVA_HOME\bin\java.exe&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base --add-opens javafx.fxml/javafx.fxml=ALL-UNNAMED -Dfile.encoding=UTF-8 -Djava.awt.headless=false -cp 'lib/*' ${main.class}${line.separator}"/>
+                    
+                    <!-- Create fallback script for system Java -->
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" message="@echo off${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="cd /d &quot;%~dp0..&quot;${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="java -version${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="if errorlevel 1 (${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="    echo Java is not installed or not in PATH${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="    echo Please use ${app.name}.bat instead (includes bundled Java)${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="    pause${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="    exit /b 1${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message=")${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="java -Dfile.encoding=UTF-8 -Djava.awt.headless=false -cp &quot;lib/*&quot; ${main.class}${line.separator}"/>
+                    <echo file="target/windows-zip/bin/${app.name}-system-java.bat" append="true" message="pause${line.separator}"/>
+                    
+                    <!-- Create README file -->
+                    <echo file="target/windows-zip/README.txt" message="Musha Parish Contributions Management System${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="=========================================${line.separator}${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="This is a PORTABLE JavaFX application with bundled Java Runtime!${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="No Java or JavaFX installation required on the target machine.${line.separator}${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="To run the application:${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="1. Double-click bin/${app.name}.bat (RECOMMENDED - uses bundled Java+JavaFX)${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="2. OR run bin/${app.name}.ps1 from PowerShell (uses bundled Java+JavaFX)${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="3. OR use bin/${app.name}-system-java.bat (requires system Java 17+ with JavaFX)${line.separator}${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="Directory Structure:${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="- bin/     : Executable scripts${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="- lib/     : Application and dependencies${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="- jre/     : Bundled Java Runtime (includes JavaFX)${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="- config/  : Configuration files (if any)${line.separator}${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="JavaFX Modules included: javafx.controls, javafx.fxml, javafx.graphics, javafx.base${line.separator}${line.separator}"/>
+                    <echo file="target/windows-zip/README.txt" append="true" message="Copyright 2025 Ananie Musha Parish${line.separator}"/>
+                    
+                    <!-- Create version info file -->
+                    <echo file="target/windows-zip/VERSION.txt" message="Application: ${app.name}${line.separator}"/>
+                    <echo file="target/windows-zip/VERSION.txt" append="true" message="Version: ${app.version}${line.separator}"/>
+                    <echo file="target/windows-zip/VERSION.txt" append="true" message="Java Home: ${local.java.home}${line.separator}"/>
+                    <echo file="target/windows-zip/VERSION.txt" append="true" message="Package Type: Portable (with bundled JRE)${line.separator}"/>
+                    <echo file="target/windows-zip/VERSION.txt" append="true" message="Build Date: ${maven.build.timestamp}${line.separator}"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.6.0</version>
+            <executions>
+              <execution>
+                <id>create-zip</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <descriptors>
+                    <descriptor>src/assembly/windows-zip.xml</descriptor>
+                  </descriptors>
+                  <finalName>${app.name}-${app.version}-windows-portable</finalName>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>linux</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>${jpackage.plugin.version}</version>
+            <executions>
+              <execution>
+                <id>linux-package</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jpackage</goal>
+                </goals>
+                <configuration>
+                  <type>DEB</type>
+                  <name>${app.name}</name>
+                  <appVersion>${app.version}</appVersion>
+                   <jlink>false</jlink>
+                  <vendor>Ananie Musha Parish</vendor>
+                  <destination>target/dist</destination>
+                  <input>target</input>
+                   <mainJar>${app.name}-${app.version}-fat.jar</mainJar>
+                  <mainClass>${main.class}</mainClass>
+                  <runtimeImage>/usr/lib/jvm/bellsoft-java17-full-amd64</runtimeImage>
+                                                     
+               
+				  <javaOptions>
+				    <option>-Dfile.encoding=UTF-8</option>
+				    <option>-Djava.awt.headless=false</option>
+				  </javaOptions>
+                                
+                  <linuxShortcut>true</linuxShortcut>
+                  <linuxMenuGroup>Office</linuxMenuGroup>
+                  <description>Musha Parish Contributions Management System</description>
+                  <copyright>2025 Ananie Musha Parish</copyright>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>mac</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>${jpackage.plugin.version}</version>
+            <executions>
+              <execution>
+                <id>mac-package</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>jpackage</goal>
+                </goals>
+                <configuration>
+                  <type>PKG</type>
+                  <name>${app.name}</name>
+                  <appVersion>${app.version}</appVersion>
+                  <vendor>Ananie Musha Parish</vendor>
+                  <destination>target/dist</destination>
+                  <input>target</input>
+                   <mainJar>${app.name}-${app.version}-fat.jar</mainJar>
+                  <mainClass>${main.class}</mainClass>
+                  <jlink>false</jlink>
+                  <modulePaths>
+                      <modulePath>${java.home}/jmods</modulePath>
+                     <modulePath>/opt/javafx-sdk-17.0.14/lib</modulePath>
+                  </modulePaths>
+                  <addModules>
+                  javafx.controls,javafx.fxml,
+                  javafx.graphics,javafx.base,
+                  java.sql,java.naming
+                </addModules>
+   
+				  <javaOptions>
+				    <option>--module-path</option>
+				     <option>$APPDIR/lib:${java.home}/jmods</option>
+				    <option>--add-modules</option>
+				    <option>javafx.controls,javafx.fxml,javafx.graphics,javafx.base</option>
+				     <option>ALL-MODULE-PATH</option>
+				    <option>-Dfile.encoding=UTF-8</option>
+				    <option>-Djava.awt.headless=false</option>
+				  </javaOptions>
+                  
+                  <description>Musha Parish Contributions Management System</description>
+                  <copyright>2025 Ananie Musha Parish</copyright>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+   <profile>
+      <id>dev</id>
+      <properties>
+        <spring.profiles.active>dev</spring.profiles.active>
+      </properties>
+    </profile>
+    
+    <profile>
+      <id>prod</id>
+      <properties>
+        <spring.profiles.active>prod</spring.profiles.active>
+      </properties>
+    </profile>
+  </profiles>
+</project>
