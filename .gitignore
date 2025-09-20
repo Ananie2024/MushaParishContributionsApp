@@ -1,0 +1,34 @@
+### Eclipse ###
+.classpath
+.project
+.settings/
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+### Logs ###
+logs/
+*.log
+
+### Reports / Backups / Database (ignore these completely) ###
+reports/
+backups/
+database/
+
+### OS Files ###
+.DS_Store
+Thumbs.db
+
+### Java Artifacts ###
+*.class
+*.jar
+*.war
+*.ear
