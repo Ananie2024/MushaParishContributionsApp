@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.controllers;
+package org.ananie.parishApp.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,10 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import org.ananie.mushaParish.model.BEC;
-import org.ananie.mushaParish.model.Contribution;
-import org.ananie.mushaParish.model.Faithful;
-import org.ananie.mushaParish.model.SubParish;
 import org.ananie.mushaParish.services.BECService;
 import org.ananie.mushaParish.services.ContributionService;
 import org.ananie.mushaParish.services.FaithfulService;
@@ -26,9 +22,14 @@ import org.ananie.mushaParish.services.LoggingService;
 import org.ananie.mushaParish.services.SubParishService;
 import org.ananie.mushaParish.utilities.FaithfulPDFUtility;
 import org.ananie.mushaParish.utilities.ViewPaths;
+import org.ananie.parishApp.model.BEC;
+import org.ananie.parishApp.model.Contribution;
+import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.model.SubParish;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -50,7 +51,6 @@ public class FaithfulContributionsManagerController {
     @FXML private Button overallSummaryButton;
     @FXML private VBox rootPane;
     
-
     // Faithfuls Table
     @FXML private TableView<Faithful> faithfulsTable;
     @FXML private TableColumn<Faithful, String> faithfulNameCol;
@@ -77,14 +77,12 @@ public class FaithfulContributionsManagerController {
     @FXML private TableColumn<Contribution, BigDecimal> contributionAmountCol;
     @FXML private TableColumn<Contribution, LocalDate> contributionDateCol;
    
-
     // Contribution actions buttons
     @FXML private Button addContributionForSelectedBtn;
     @FXML private Button editContributionBtn;
     @FXML private Button deleteContributionBtn;
     @FXML private Button generatePDFBtn1;
     
-
     private final FaithfulService faithfulService;
     private final ContributionService contributionService;
     private final SubParishService subParishService;
@@ -99,7 +97,6 @@ public class FaithfulContributionsManagerController {
     private Faithful selectedFaithfulInTable; // Holds the currently selected faithful
 	private HomePageController homePageController;
 	
-
     @Autowired // Constructor injection
     public FaithfulContributionsManagerController(FaithfulService faithfulService,
                                                 ContributionService contributionService,
@@ -167,7 +164,6 @@ public class FaithfulContributionsManagerController {
             editContributionBtn.setDisable(!isSelected);
             deleteContributionBtn.setDisable(!isSelected);
         });
-
 
         // --- Set up Buttons Actions ---
         addNewFaithfulBtn.setOnAction(event -> openAddEditFaithfulForm(null)); // Open in add mode
@@ -378,8 +374,7 @@ public class FaithfulContributionsManagerController {
             // Load all faithfuls as fallback
             populateAllFaithfuls();
             return; }
-        
-        
+                
         SubParish selectedSubParish = filterSubParishComboBox.getSelectionModel().getSelectedItem();
         BEC selectedBec = filterBecComboBox.getSelectionModel().getSelectedItem();
         String searchText = searchFaithfulTextField.getText();
@@ -388,8 +383,7 @@ public class FaithfulContributionsManagerController {
         	    "Filtered faithfuls - SubParish: " + (selectedSubParish != null ? selectedSubParish.getName() : "None") + 
         	    ", BEC: " + (selectedBec != null ? selectedBec.getName() : "None") + 
         	    ", Search: " + (searchText != null ? searchText : "None"));
-
-
+        
         List<Faithful> filteredList;
 
         if (selectedSubParish != null && selectedBec != null) {
@@ -452,7 +446,7 @@ public class FaithfulContributionsManagerController {
         filterFaithfuls(); // Re-apply current filters to refresh
         faithfulsTable.getSelectionModel().clearSelection(); // Clear selection after refresh
     }
-
+   
     private void deleteSelectedFaithful() {
         Faithful selected = faithfulsTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -652,7 +646,6 @@ public class FaithfulContributionsManagerController {
             showAlert(Alert.AlertType.WARNING, "Ikosa", "Hitamo umukristu kuri liste mbere yo gukora ifishi ya PDF.");
             return;
         }
-
         List<Contribution> currentContributions = contributionsTable.getItems();
         Stage stage = (Stage) generatePDFBtn1.getScene().getWindow();
         
@@ -660,7 +653,6 @@ public class FaithfulContributionsManagerController {
         loggingService.logUserAction("PDF_EXPORT_WITH_LOGO", 
         	    "Exported PDF with logo for faithful: " + selectedFaithfulInTable.getName());
     }
-
     // --- General Alert Helper ---
     private void showAlert(AlertType type, String title, String message) {
         Alert alert = new Alert(type);

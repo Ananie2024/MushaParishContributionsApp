@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.controllers;
+package org.ananie.parishApp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.net.URL;
 
-import org.ananie.mushaParish.model.Faithful;
-import org.ananie.mushaParish.model.SubParish;
 import org.ananie.mushaParish.services.LoggingService;
-import org.ananie.mushaParish.utilities.ViewPaths; 
+import org.ananie.mushaParish.utilities.ViewPaths;
+import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.model.SubParish; 
+
 @Component
 public class HomePageController {
 
@@ -30,6 +30,7 @@ public class HomePageController {
     @FXML private StackPane contentArea;
     @FXML private Button addSubParishBtn;
     @FXML private Button addBECBtn;
+    @FXML private Button logoutButton;
     
     // This instance will be set AFTER FaithfulContributionsManager.fxml is loaded
     private FaithfulContributionsManagerController faithfulManagerControllerInstance;
@@ -67,6 +68,15 @@ public class HomePageController {
             loggingService.logUserAction("NAVIGATION", "Opened Add BEC dialog");
             openAddBECDialog(null);
         });
+        
+        logoutButton.setOnAction(e -> {
+        	loggingService.logUserAction("NAVIGATION", "the user loggged out");
+        	try {
+				logout();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+        });
        
         //Capture the initial content of the contentArea AFTER FXML has loaded it
         if (!contentArea.getChildren().isEmpty()) {
@@ -74,7 +84,23 @@ public class HomePageController {
         }
         
          }
-    public void restoreInitialHomePageContent() {
+    private void logout() throws IOException {
+FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewPaths.HOME));
+		
+		loader.setControllerFactory(applicationContext::getBean);
+		
+		Parent root= loader.load();
+		Stage stage = new Stage();
+		stage.setTitle("ParishApp");
+		stage.initModality(Modality.WINDOW_MODAL);
+		stage.setTitle("Homepage");
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.showAndWait();
+		
+	}
+
+	public void restoreInitialHomePageContent() {
     	loggingService.logUserAction("NAVIGATION", "Restoring initial home page content");
     	
         if (initialContentArea != null) {
@@ -88,7 +114,6 @@ public class HomePageController {
             contentArea.getChildren().clear(); // Fallback to clear
         }
     }
-
     /**
      * Loads an FXML file into the contentArea and handles controller injection via Spring.
      * @param fxmlPath The path to the FXML file (from ViewPaths constants)
@@ -101,7 +126,7 @@ public class HomePageController {
         	            "Loading view: " + fxmlPath + 
         	            (mode != null ? " (Mode: " + mode + ")" : "") +
         	            (data != null ? " (With data)" : ""));
-        	            
+        	      
             FXMLLoader fxmlLoader = new FXMLLoader();            
             URL fxmlUrl = getClass().getResource(fxmlPath);
             if (fxmlUrl == null) {
@@ -237,8 +262,7 @@ public class HomePageController {
                  (preselectedSubParish != null ? " (Pre-selected SubParish)" : ""));
          stage.showAndWait();
          loggingService.logUserAction("DIALOG_CLOSE", "Add BEC dialog closed");
-         
-
+        
      } catch (IOException e) {
     	 loggingService.logError("DIALOG_OPEN_FAILED", e);
          System.err.println( e.getMessage());

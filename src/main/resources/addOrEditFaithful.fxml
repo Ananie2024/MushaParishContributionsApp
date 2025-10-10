@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" prefHeight="600.0" prefWidth="640.0" vgap="30.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.mushaParish.controllers.AddOrEditFaithfulController">
+<GridPane maxHeight="-Infinity" prefHeight="600.0" prefWidth="640.0" vgap="30.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.parishApp.controllers.AddOrEditFaithfulController">
 
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="168.0" />

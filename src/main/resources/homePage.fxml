@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.mushaParish.controllers.HomePageController">
+<BorderPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.parishApp.controllers.HomePageController">
 
 <top>
 <Label fx:id="topLabel" prefHeight="83.0" prefWidth="900.0" text="ITURO RYA KILIZIYA : PAROISSE MUSHA" textFill="#081701" BorderPane.alignment="CENTER">
@@ -31,6 +31,7 @@
 <HBox spacing="10">
 <Button fx:id="addSubParishBtn" text="Andika Santarali nshya" />
 <Button fx:id="addBECBtn" text="Andika mpuza nshya" />
+                  <Button fx:id="logoutButton" mnemonicParsing="false" text="Logout" />
 </HBox>
 
 </VBox>

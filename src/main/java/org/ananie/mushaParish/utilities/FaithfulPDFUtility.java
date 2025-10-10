@@ -4,10 +4,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import org.ananie.mushaParish.model.Contribution;
-import org.ananie.mushaParish.model.Faithful;
+
 import org.ananie.mushaParish.services.FaithfulPDFService;
 import org.ananie.mushaParish.services.LoggingService;
+import org.ananie.parishApp.model.Contribution;
+import org.ananie.parishApp.model.Faithful;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

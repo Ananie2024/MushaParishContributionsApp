@@ -3,7 +3,7 @@ package org.ananie.mushaParish.dao;
 import java.util.List;
 import java.util.Optional;
 
-import org.ananie.mushaParish.model.SubParish;
+import org.ananie.parishApp.model.SubParish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

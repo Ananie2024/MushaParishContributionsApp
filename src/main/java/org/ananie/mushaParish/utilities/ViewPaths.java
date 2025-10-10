@@ -11,4 +11,5 @@ public class ViewPaths {
     public static final String CONTRIBUTION_SUMMARY ="/contributionSummary.fxml";
     public static final String CONTRIBUTION_REPORT = "/contribution-report.fxml";
     public static final String LOGO = "/parish_logo.png";
+    public static final String LOGIN = "/login.fxml";
 }

@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.configurations;
+package org.ananie.parishApp.configurations;
 
 import com.itextpdf.text.BaseColor;
 import com.zaxxer.hikari.HikariDataSource; 
@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "org.ananie.mushaParish")
+@ComponentScan(basePackages = "org.ananie")
 @EnableJpaRepositories(basePackages = "org.ananie.mushaParish.dao")
 @EnableTransactionManagement
 @EnableAspectJAutoProxy

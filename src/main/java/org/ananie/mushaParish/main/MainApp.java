@@ -1,7 +1,7 @@
 package org.ananie.mushaParish.main;
-import org.ananie.mushaParish.configurations.AppConfig;
 import org.ananie.mushaParish.services.LoggingService;
 import org.ananie.mushaParish.utilities.ViewPaths;
+import org.ananie.parishApp.configurations.AppConfig;
 import org.slf4j.LoggerFactory;
 
 import javafx.application.Application;
@@ -47,9 +47,9 @@ public class MainApp extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader();
             
             // FXML files are directly in src/main/resources, so the path is like /filename.fxml
-            URL fxmlUrl = getClass().getResource(ViewPaths.HOME);
+            URL fxmlUrl = getClass().getResource(ViewPaths.LOGIN);
             if (fxmlUrl == null) {
-                System.err.println("Error: FXML file not found at " + ViewPaths.HOME);
+                System.err.println("Error: FXML file not found at " + ViewPaths.LOGIN);
                 // Optionally show error to user via Alert
                 Platform.exit();
                 return;
@@ -67,7 +67,6 @@ public class MainApp extends Application {
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource(ViewPaths.STYLE).toExternalForm());
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Amaturo Paruwase Musha App"); // Set your application title
             primaryStage.show();
             loggingService.logUserAction("POROGARAMU ITANGIYE GUKORA", "JAVAFX UI iratangiye");
 

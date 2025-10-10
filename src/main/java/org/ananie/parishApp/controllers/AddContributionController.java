@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.controllers;
+package org.ananie.parishApp.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,11 +9,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import org.ananie.mushaParish.model.Contribution;
-import org.ananie.mushaParish.model.Faithful;
 import org.ananie.mushaParish.services.ContributionService;
 import org.ananie.mushaParish.services.LoggingService;
+import org.ananie.parishApp.model.Contribution;
+import org.ananie.parishApp.model.Faithful;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -106,7 +107,7 @@ public class AddContributionController {
         datePicker.setValue(contribution.getDate());
         notesTextArea.setText(contribution.getNotes());
     }
-   
+    
     private void saveContribution() {
         statusLabel.setText("");
         statusLabel.setStyle("-fx-text-fill: black;");

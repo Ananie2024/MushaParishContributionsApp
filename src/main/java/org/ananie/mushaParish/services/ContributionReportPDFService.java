@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.ananie.mushaParish.model.FaithfulContributionRow;
 import org.ananie.mushaParish.utilities.ViewPaths;
+import org.ananie.parishApp.model.FaithfulContributionRow;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.BaseColor;

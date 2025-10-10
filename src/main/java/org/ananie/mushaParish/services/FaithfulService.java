@@ -2,9 +2,9 @@ package org.ananie.mushaParish.services;
 
 import org.ananie.mushaParish.dao.ContributionRepository;
 import org.ananie.mushaParish.dao.FaithfulRepository;
-import org.ananie.mushaParish.model.BEC;
-import org.ananie.mushaParish.model.Faithful;
-import org.ananie.mushaParish.model.SubParish;
+import org.ananie.parishApp.model.BEC;
+import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.model.SubParish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;

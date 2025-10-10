@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import org.ananie.mushaParish.model.BEC;
-import org.ananie.mushaParish.model.Contribution;
-import org.ananie.mushaParish.model.Faithful;
-import org.ananie.mushaParish.model.SubParish;
+import org.ananie.parishApp.model.BEC;
+import org.ananie.parishApp.model.Contribution;
+import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.model.SubParish;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

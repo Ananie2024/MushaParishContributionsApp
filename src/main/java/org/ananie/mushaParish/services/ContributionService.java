@@ -2,13 +2,14 @@ package org.ananie.mushaParish.services;
 
 import org.ananie.mushaParish.dao.ContributionRepository;
 import org.ananie.mushaParish.dao.FaithfulYearlyContributionProjection;
+import org.ananie.parishApp.model.BEC;
+import org.ananie.parishApp.model.Contribution;
+import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.model.FaithfulContributionRow;
+import org.ananie.parishApp.model.SubParish;
 import org.ananie.mushaParish.dao.BECRepository;
-import org.ananie.mushaParish.model.BEC;
-import org.ananie.mushaParish.model.Contribution;
-import org.ananie.mushaParish.model.Faithful;
-import org.ananie.mushaParish.model.FaithfulContributionRow;
-import org.ananie.mushaParish.model.SubParish;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public class ContributionService {
         this.faithfulService = faithfulService;
         this.becRepository = becRepository;
     }
-
+    @PreAuthorize("hasRole('MANAGER')")
     @Transactional
     public Contribution save(Contribution contribution) {
         if (contribution.getFaithful() == null || contribution.getFaithful().getId() == null)
@@ -48,14 +49,14 @@ public class ContributionService {
 
         return contributionRepository.save(contribution);
     }
-
+    @PreAuthorize("hasRole('MANAGER')")
     @Transactional
     public Contribution update(Contribution contribution) {
         if (contribution.getId() == null || !contributionRepository.existsById(contribution.getId()))
             throw new IllegalArgumentException("Cannot update Contribution: ID is null or does not exist.");
         return save(contribution);
     }
-
+    @PreAuthorize("hasRole('MANAGER')")
     @Transactional
     public void delete(Long id) {
     	 Contribution contribution = contributionRepository.findById(id)

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.mushaParish.controllers.ContributionSummaryController">
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ananie.parishApp.controllers.ContributionSummaryController">
     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
     
     <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="AMATURO YOSE" />

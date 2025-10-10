@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.model;
+package org.ananie.parishApp.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

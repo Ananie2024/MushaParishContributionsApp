@@ -7,10 +7,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import org.ananie.mushaParish.configurations.PDFConfig;
-import org.ananie.mushaParish.model.FaithfulContributionRow;
+
 import org.ananie.mushaParish.services.ContributionReportPDFService;
 import org.ananie.mushaParish.services.LoggingService;
+import org.ananie.parishApp.configurations.PDFConfig;
+import org.ananie.parishApp.model.FaithfulContributionRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

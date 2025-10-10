@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.configurations;
+package org.ananie.parishApp.configurations;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
