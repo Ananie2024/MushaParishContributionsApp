@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.dao;
+package org.ananie.parishApp.dao;
 
 
 import org.ananie.parishApp.model.BEC;

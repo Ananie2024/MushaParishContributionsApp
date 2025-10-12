@@ -1,13 +1,13 @@
-package org.ananie.mushaParish.services;
+package org.ananie.parishApp.services;
 
-import org.ananie.mushaParish.dao.ContributionRepository;
-import org.ananie.mushaParish.dao.FaithfulYearlyContributionProjection;
+import org.ananie.parishApp.dao.BECRepository;
+import org.ananie.parishApp.dao.ContributionRepository;
+import org.ananie.parishApp.dao.FaithfulYearlyContributionProjection;
 import org.ananie.parishApp.model.BEC;
 import org.ananie.parishApp.model.Contribution;
 import org.ananie.parishApp.model.Faithful;
 import org.ananie.parishApp.model.FaithfulContributionRow;
 import org.ananie.parishApp.model.SubParish;
-import org.ananie.mushaParish.dao.BECRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package org.ananie.mushaParish.services;
+package org.ananie.parishApp.services;
 
-import org.ananie.mushaParish.dao.SubParishRepository;
+import org.ananie.parishApp.dao.SubParishRepository;
 import org.ananie.parishApp.model.SubParish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

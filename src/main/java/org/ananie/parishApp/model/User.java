@@ -3,6 +3,10 @@ package org.ananie.parishApp.model;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -61,16 +65,18 @@ public class User {
 	    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
 	    @Column(name = "role")
 	    private Set<String> roles = new HashSet<>();
-
+	    
+	    @CreationTimestamp
 	    @Column(name = "created_at")
 	    private LocalDateTime createdAt;
-
+	    
+	    @UpdateTimestamp
 	    @Column(name = "updated_at")
 	    private LocalDateTime updatedAt;
 
 	    @Column(name = "last_login")
 	    private LocalDateTime lastLogin;
-
+     /*JPA lifecycle callbacks
 	    @PrePersist
 	    protected void onCreate() {
 	        createdAt = LocalDateTime.now();
@@ -81,7 +87,22 @@ public class User {
 	    protected void onUpdate() {
 	        updatedAt = LocalDateTime.now();
 	    }
+	       */
 	    
+	    // Convenience method to add roles
+	    public void addRole(String role) {
+	        if (this.roles == null) {
+	            this.roles = new HashSet<>();
+	        }
+	        this.roles.add(role);
+	    }
+	    
+	    // Convenience method to remove roles
+	    public void removeRole(String role) {
+	        if (this.roles != null) {
+	            this.roles.remove(role);
+	        }
+	    }
 	    public User (String username, String password, String email) {
 	    	this.username= username;
 	    	this.password=password;

@@ -3,7 +3,8 @@ package org.ananie.parishApp.configurations;
 import com.itextpdf.text.BaseColor;
 import com.zaxxer.hikari.HikariDataSource; 
 import jakarta.validation.Validator;
-import org.ananie.mushaParish.utilities.ApplicationDirectoryUtil;
+
+import org.ananie.parishApp.utilities.ApplicationDirectoryUtil;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,31 +20,27 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
-
 import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = "org.ananie")
-@EnableJpaRepositories(basePackages = "org.ananie.mushaParish.dao")
+@EnableJpaRepositories(basePackages = "org.ananie.parishApp.dao")
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 public class AppConfig {
 
     /**
-     * H2 Database Configuration (Default - Embedded)
-     * Perfect for packaging and distribution
+     * H2 Database Configuration (For Development/Testing)
      */
     @Bean
-    @Profile({"default", "h2", "production"})
+    @Profile({"h2"})
     public DataSource h2DataSource() {
         HikariDataSource ds = new HikariDataSource();
         ds.setDriverClassName("org.h2.Driver");
         
-        // Use utility to get database path in installation directory
         String dbPath = ApplicationDirectoryUtil.getDatabaseFilePath();
         System.out.println("Database will be stored at: " + dbPath);
         
-        // H2 connection URL with file mode
         ds.setJdbcUrl("jdbc:h2:file:" + dbPath + 
                      ";DB_CLOSE_ON_EXIT=FALSE" + 
                      ";AUTO_SERVER=TRUE" + 
@@ -52,28 +49,10 @@ public class AppConfig {
                      ";CASE_INSENSITIVE_IDENTIFIERS=TRUE");
         
         ds.setUsername("sa");
-        ds.setPassword(""); // H2 default
+        ds.setPassword("");
         ds.setMaximumPoolSize(10);
-        ds.setConnectionTimeout(30000); // 30 seconds
+        ds.setConnectionTimeout(30000);
         
-        // H2-specific optimizations
-        ds.addDataSourceProperty("cachePrepStmts", "true");
-        ds.addDataSourceProperty("prepStmtCacheSize", "250");
-        ds.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-            
-        // H2 connection URL with file mode
-        ds.setJdbcUrl("jdbc:h2:file:" + dbPath + 
-                     ";AUTO_SERVER=TRUE" + 
-                     ";MODE=MySQL" + 
-                     ";DATABASE_TO_LOWER=TRUE" +
-                     ";CASE_INSENSITIVE_IDENTIFIERS=TRUE");
-        
-        ds.setUsername("sa");
-        ds.setPassword(""); // H2 default
-        ds.setMaximumPoolSize(10);
-        ds.setConnectionTimeout(30000); // 30 seconds
-        
-        // H2-specific optimizations
         ds.addDataSourceProperty("cachePrepStmts", "true");
         ds.addDataSourceProperty("prepStmtCacheSize", "250");
         ds.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
@@ -99,86 +78,76 @@ public class AppConfig {
     }
 
     /**
-     * MySQL Database Configuration (For Development/Migration)
-     * Keep this for backward compatibility or migration purposes
+     * MySQL Database Configuration (DEFAULT - Production)
      */
     @Bean
-    @Profile("mysql")
+    @Profile({"default", "mysql", "production"})
     public DataSource mysqlDataSource() {
+        System.out.println("==============================================");
+        System.out.println("Attempting to connect to MySQL database...");
+        System.out.println("URL: jdbc:mysql://localhost:3306/parishAppDB");
+        System.out.println("==============================================");
+        
         HikariDataSource ds = new HikariDataSource();
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        ds.setJdbcUrl("jdbc:mysql://localhost:3306/AmaturoMushaDB?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC");
+        ds.setJdbcUrl("jdbc:mysql://localhost:3306/parishAppDB?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC");
         ds.setUsername("ananie"); 
         ds.setPassword("ananie@11072"); 
         ds.setMaximumPoolSize(10);
-        ds.setConnectionTimeout(50000);
+        ds.setConnectionTimeout(5000); // Reduced to 5 seconds for faster failure
+        
+        // MySQL-specific optimizations
+        ds.addDataSourceProperty("cachePrepStmts", "true");
+        ds.addDataSourceProperty("prepStmtCacheSize", "250");
+        ds.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        ds.addDataSourceProperty("useServerPrepStmts", "true");
 
         return ds;
     }
 
     /**
-     * Primary DataSource Bean - will use H2 by default
+     * H2-specific Entity Manager Factory
      */
-    @Bean
-    public DataSource dataSource() {
-        // Default to H2 - can be overridden by profile
-        return h2DataSource();
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    @Bean(name = "entityManagerFactory")
+    @Profile("h2")
+    public LocalContainerEntityManagerFactoryBean h2EntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(dataSource());
-        emf.setPackagesToScan("org.ananie.mushaParish.model");
+        emf.setDataSource(h2DataSource());
+        emf.setPackagesToScan("org.ananie.parishApp.model");
 
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
-        // Use H2 dialect by default - will work with both H2 and MySQL due to MODE=MySQL setting
         adapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
         emf.setJpaVendorAdapter(adapter);
 
         Properties props = new Properties();
-        
-        // Schema management - create/update tables automatically
         props.put("hibernate.hbm2ddl.auto", "update");
-        
-        // Use H2 dialect - compatible with MySQL mode
         props.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        
-        // SQL logging and formatting
         props.put("hibernate.show_sql", "true");
         props.put("hibernate.format_sql", "true");
         props.put("hibernate.use_sql_comments", "true");
-        
-        // Modern Hibernate settings
         props.put("hibernate.id.new_generator_mappings", "true");
         props.put(AvailableSettings.SHOW_SQL, true);
         props.put(AvailableSettings.FORMAT_SQL, true);
         props.put(AvailableSettings.GENERATE_STATISTICS, true);
-        
-        // H2-specific optimizations
         props.put("hibernate.jdbc.batch_size", "20");
         props.put("hibernate.order_inserts", "true");
         props.put("hibernate.order_updates", "true");
         props.put("hibernate.jdbc.batch_versioned_data", "true");
         
-        // Parameter logging (optional - can be verbose)
-       props.put("hibernate.type.descriptor.sql.BasicBinder", "TRACE");
-        
         emf.setJpaProperties(props);
-
         return emf;
     }
 
     /**
-     * Profile-specific Entity Manager Factory for MySQL
+     * MySQL Entity Manager Factory (DEFAULT - Production)
      */
-    @Bean
-    @Profile("mysql")
+    @Bean(name = "entityManagerFactory")
+    @Profile({"default", "mysql", "production"})
     public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(mysqlDataSource());
-        emf.setPackagesToScan("org.ananie.mushaParish.model");
+        emf.setPackagesToScan("org.ananie.parishApp.model");
 
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
@@ -192,15 +161,62 @@ public class AppConfig {
         props.put("hibernate.format_sql", "true");
         props.put("hibernate.use_sql_comments", "true");
         props.put("hibernate.id.new_generator_mappings", "true");
+        props.put(AvailableSettings.SHOW_SQL, true);
+        props.put(AvailableSettings.FORMAT_SQL, true);
+        props.put(AvailableSettings.GENERATE_STATISTICS, true);
+        props.put("hibernate.jdbc.batch_size", "20");
+        props.put("hibernate.order_inserts", "true");
+        props.put("hibernate.order_updates", "true");
+        props.put("hibernate.jdbc.batch_versioned_data", "true");
         
         emf.setJpaProperties(props);
         return emf;
     }
 
-    @Bean
+    /**
+     * Test Entity Manager Factory
+     */
+    @Bean(name = "entityManagerFactory")
+    @Profile("test")
+    public LocalContainerEntityManagerFactoryBean testEntityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(h2TestDataSource());
+        emf.setPackagesToScan("org.ananie.parishApp.model");
+
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setShowSql(true);
+        adapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
+        emf.setJpaVendorAdapter(adapter);
+
+        Properties props = new Properties();
+        props.put("hibernate.hbm2ddl.auto", "create-drop");
+        props.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        
+        emf.setJpaProperties(props);
+        return emf;
+    }
+
+    @Bean(name = "transactionManager")
+    @Profile({"default", "mysql", "production"})
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager tm = new JpaTransactionManager();
-        tm.setEntityManagerFactory(entityManagerFactory().getObject());
+        tm.setEntityManagerFactory(mysqlEntityManagerFactory().getObject());
+        return tm;
+    }
+
+    @Bean(name = "transactionManager")
+    @Profile("h2")
+    public PlatformTransactionManager h2TransactionManager() {
+        JpaTransactionManager tm = new JpaTransactionManager();
+        tm.setEntityManagerFactory(h2EntityManagerFactory().getObject());
+        return tm;
+    }
+
+    @Bean(name = "transactionManager")
+    @Profile("test")
+    public PlatformTransactionManager testTransactionManager() {
+        JpaTransactionManager tm = new JpaTransactionManager();
+        tm.setEntityManagerFactory(testEntityManagerFactory().getObject());
         return tm;
     }
 
@@ -213,11 +229,9 @@ public class AppConfig {
     public PDFConfig pdfConfig() {
         PDFConfig config = new PDFConfig();
 
-        // PDF Generation Settings - Updated for better resource handling
-        config.setLogoPath("/parish_logo.png"); // Resource path - will work in packaged JAR
+        config.setLogoPath("/parish_logo.png");
         config.setParishName("PARUWASI MUSHA - MUTAGATIFU DOMINIKO SAVIYO");
         
-        // Use application installation directory for reports
         String outputDir = ApplicationDirectoryUtil.getReportsDirectory();
         System.out.println("PDF reports will be stored at: " + outputDir);
         
@@ -225,18 +239,15 @@ public class AppConfig {
         config.setAutoOpenAfterGeneration(true);
         config.setFontFamily("HELVETICA");
 
-        // Church Information
-        config.setChurchAddress("MUSHA - RWAMAGANA - RWANDA");
-        config.setChurchPhone("+250 788 827 032");
-        config.setChurchEmail("mushaparish@gmail.com");
+        															config.setChurchAddress("xxxx - xxx - xxx");
+        config.setChurchPhone("");
+        config.setChurchEmail("xxxxxx@gmail.com");
 
-        // Page Layout Settings
         config.setPageMarginTop(60f);
         config.setPageMarginBottom(80f);
         config.setPageMarginLeft(40f);
         config.setPageMarginRight(40f);
 
-        // Font Sizes
         config.setTitleFontSize(20);
         config.setSubtitleFontSize(14);
         config.setHeaderFontSize(12);
@@ -244,32 +255,22 @@ public class AppConfig {
         config.setValueFontSize(11);
         config.setTableFontSize(10);
 
-        // Colors
-        config.setHeaderColor(new BaseColor(52, 58, 64)); // Dark gray
-        config.setAlternateRowColor(new BaseColor(248, 249, 250)); // Light gray
-        config.setTitleColor(new BaseColor(0, 123, 255)); // Blue
+        config.setHeaderColor(new BaseColor(52, 58, 64));
+        config.setAlternateRowColor(new BaseColor(248, 249, 250));
+        config.setTitleColor(new BaseColor(0, 123, 255));
 
         return config;
     }
 
-    /**
-     * Initialize application directories on startup
-     * This ensures all necessary directories are created
-     */
     @Bean
     public ApplicationDirectoryInitializer applicationDirectoryInitializer() {
         return new ApplicationDirectoryInitializer();
     }
     
-    /**
-     * Simple bean to initialize directories on startup
-     */
     public static class ApplicationDirectoryInitializer {
         public ApplicationDirectoryInitializer() {
             ApplicationDirectoryUtil.initializeApplicationDirectories();
             ApplicationDirectoryUtil.printApplicationInfo();
         }
-     }
-   }
- 
-   
+    }
+}

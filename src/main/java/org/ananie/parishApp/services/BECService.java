@@ -1,7 +1,7 @@
-package org.ananie.mushaParish.services;
+package org.ananie.parishApp.services;
 
-import org.ananie.mushaParish.dao.BECRepository;
-import org.ananie.mushaParish.dao.SubParishRepository;
+import org.ananie.parishApp.dao.BECRepository;
+import org.ananie.parishApp.dao.SubParishRepository;
 import org.ananie.parishApp.model.BEC;
 import org.ananie.parishApp.model.SubParish;
 import org.springframework.beans.factory.annotation.Autowired;

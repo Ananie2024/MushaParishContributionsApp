@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.utilities;
+package org.ananie.parishApp.utilities;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -8,10 +8,10 @@ import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
-import org.ananie.mushaParish.services.ContributionReportPDFService;
-import org.ananie.mushaParish.services.LoggingService;
 import org.ananie.parishApp.configurations.PDFConfig;
 import org.ananie.parishApp.model.FaithfulContributionRow;
+import org.ananie.parishApp.services.ContributionReportPDFService;
+import org.ananie.parishApp.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

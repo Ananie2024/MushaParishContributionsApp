@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.utilities;
+package org.ananie.parishApp.utilities;
 
 import java.io.File;
 import java.net.URISyntaxException;

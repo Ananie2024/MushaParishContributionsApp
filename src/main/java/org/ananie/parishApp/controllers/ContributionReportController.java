@@ -12,14 +12,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.StringConverter;
 
-import org.ananie.mushaParish.services.BECService;
-import org.ananie.mushaParish.services.ContributionService;
-import org.ananie.mushaParish.services.LoggingService;
-import org.ananie.mushaParish.services.SubParishService;
-import org.ananie.mushaParish.utilities.ContributionReportPDFUtility;
 import org.ananie.parishApp.model.BEC;
 import org.ananie.parishApp.model.FaithfulContributionRow;
 import org.ananie.parishApp.model.SubParish;
+import org.ananie.parishApp.services.BECService;
+import org.ananie.parishApp.services.ContributionService;
+import org.ananie.parishApp.services.LoggingService;
+import org.ananie.parishApp.services.SubParishService;
+import org.ananie.parishApp.utilities.ContributionReportPDFUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

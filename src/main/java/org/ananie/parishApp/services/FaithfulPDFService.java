@@ -1,8 +1,8 @@
-package org.ananie.mushaParish.services;
+package org.ananie.parishApp.services;
 
-import org.ananie.mushaParish.utilities.ViewPaths;
 import org.ananie.parishApp.model.Contribution;
 import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.utilities.ViewPaths;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.BaseColor;

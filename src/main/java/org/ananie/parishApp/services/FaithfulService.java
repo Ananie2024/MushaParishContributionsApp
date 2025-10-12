@@ -1,7 +1,7 @@
-package org.ananie.mushaParish.services;
+package org.ananie.parishApp.services;
 
-import org.ananie.mushaParish.dao.ContributionRepository;
-import org.ananie.mushaParish.dao.FaithfulRepository;
+import org.ananie.parishApp.dao.ContributionRepository;
+import org.ananie.parishApp.dao.FaithfulRepository;
 import org.ananie.parishApp.model.BEC;
 import org.ananie.parishApp.model.Faithful;
 import org.ananie.parishApp.model.SubParish;

@@ -8,9 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import org.ananie.mushaParish.services.SubParishService;
 import org.ananie.parishApp.model.SubParish;
-import org.ananie.mushaParish.services.LoggingService;
+import org.ananie.parishApp.services.LoggingService;
+import org.ananie.parishApp.services.SubParishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

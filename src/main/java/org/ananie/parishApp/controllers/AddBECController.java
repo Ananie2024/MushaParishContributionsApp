@@ -13,11 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import org.ananie.mushaParish.services.BECService;
-import org.ananie.mushaParish.services.LoggingService;
-import org.ananie.mushaParish.services.SubParishService;
 import org.ananie.parishApp.model.BEC;
 import org.ananie.parishApp.model.SubParish;
+import org.ananie.parishApp.services.BECService;
+import org.ananie.parishApp.services.LoggingService;
+import org.ananie.parishApp.services.SubParishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;

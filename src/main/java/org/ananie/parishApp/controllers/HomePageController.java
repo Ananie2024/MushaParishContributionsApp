@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 
-import org.ananie.mushaParish.services.LoggingService;
-import org.ananie.mushaParish.utilities.ViewPaths;
 import org.ananie.parishApp.model.Faithful;
-import org.ananie.parishApp.model.SubParish; 
+import org.ananie.parishApp.model.SubParish;
+import org.ananie.parishApp.services.LoggingService;
+import org.ananie.parishApp.utilities.ViewPaths; 
 
 @Component
 public class HomePageController {
@@ -85,18 +85,23 @@ public class HomePageController {
         
          }
     private void logout() throws IOException {
-FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewPaths.HOME));
+FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewPaths.LOGIN));
 		
 		loader.setControllerFactory(applicationContext::getBean);
 		
 		Parent root= loader.load();
+		// close the homestage on the logout
+		Stage HomePageStage = (Stage) logoutButton.getScene().getWindow();
+		HomePageStage.close();
+		
 		Stage stage = new Stage();
-		stage.setTitle("ParishApp");
-		stage.initModality(Modality.WINDOW_MODAL);
-		stage.setTitle("Homepage");
+		stage.setTitle("Parish Management");
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource(ViewPaths.STYLE).toExternalForm());
 		stage.setScene(scene);
-		stage.showAndWait();
+		stage.show();
+		
+		
 		
 	}
 

@@ -1,7 +1,7 @@
-package org.ananie.mushaParish.main;
-import org.ananie.mushaParish.services.LoggingService;
-import org.ananie.mushaParish.utilities.ViewPaths;
+package org.ananie.parishApp.main;
 import org.ananie.parishApp.configurations.AppConfig;
+import org.ananie.parishApp.services.LoggingService;
+import org.ananie.parishApp.utilities.ViewPaths;
 import org.slf4j.LoggerFactory;
 
 import javafx.application.Application;
@@ -28,7 +28,7 @@ public class MainApp extends Application {
     // This method is called by JavaFX when the application is launched, BEFORE start()
     @Override
     public void init() throws Exception {
-    	
+    	System.setProperty("spring.profiles.active", "mysql");
         // Initialize plain Spring ApplicationContext
         // We use AnnotationConfigApplicationContext because your AppConfig is annotation-based
         springContext = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -39,6 +39,7 @@ public class MainApp extends Application {
         
         
     }
+
 
     // This is the main entry point for JavaFX applications
     @Override
@@ -67,6 +68,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource(ViewPaths.STYLE).toExternalForm());
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Parish Management");
             primaryStage.show();
             loggingService.logUserAction("POROGARAMU ITANGIYE GUKORA", "JAVAFX UI iratangiye");
 

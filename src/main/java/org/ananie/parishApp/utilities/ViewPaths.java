@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.utilities;
+package org.ananie.parishApp.utilities;
 
 public class ViewPaths {
     public static final String HOME = "/homePage.fxml";

@@ -1,14 +1,14 @@
-package org.ananie.mushaParish.utilities;
+package org.ananie.parishApp.utilities;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
-import org.ananie.mushaParish.services.FaithfulPDFService;
-import org.ananie.mushaParish.services.LoggingService;
 import org.ananie.parishApp.model.Contribution;
 import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.services.FaithfulPDFService;
+import org.ananie.parishApp.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

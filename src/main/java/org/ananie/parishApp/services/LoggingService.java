@@ -1,4 +1,4 @@
-package org.ananie.mushaParish.services;
+package org.ananie.parishApp.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

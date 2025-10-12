@@ -1,6 +1,6 @@
-package org.ananie.mushaParish.aspects;
+package org.ananie.parishApp.aspects;
 
-import org.ananie.mushaParish.services.LoggingService;
+import org.ananie.parishApp.services.LoggingService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

@@ -9,10 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import org.ananie.mushaParish.services.ContributionService;
-import org.ananie.mushaParish.services.LoggingService;
 import org.ananie.parishApp.model.Contribution;
 import org.ananie.parishApp.model.Faithful;
+import org.ananie.parishApp.services.ContributionService;
+import org.ananie.parishApp.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
