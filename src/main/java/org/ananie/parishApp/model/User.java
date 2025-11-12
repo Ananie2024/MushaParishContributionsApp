@@ -76,19 +76,7 @@ public class User {
 
 	    @Column(name = "last_login")
 	    private LocalDateTime lastLogin;
-     /*JPA lifecycle callbacks
-	    @PrePersist
-	    protected void onCreate() {
-	        createdAt = LocalDateTime.now();
-	        updatedAt = LocalDateTime.now();
-	    }
 
-	    @PreUpdate
-	    protected void onUpdate() {
-	        updatedAt = LocalDateTime.now();
-	    }
-	       */
-	    
 	    // Convenience method to add roles
 	    public void addRole(String role) {
 	        if (this.roles == null) {

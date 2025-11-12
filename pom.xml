@@ -2,18 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ananie</groupId>
-  <artifactId>MushaParishContributionsApp</artifactId>
+  <artifactId>ParishManagementProgram</artifactId>
   <version>0.0.1-SNAPSHOT</version>
     
   <properties>
     <java.version>17</java.version>
+      <local.java.home>${java.home}</local.java.home>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <spring.version>6.1.6</spring.version>
     <javafx.version>17</javafx.version>
     <h2.version>2.2.224</h2.version>
-    <main.class>org.ananie.mushaParish.main.MainApp</main.class>
-    <app.name>MushaParishApp</app.name>
+    <main.class>org.ananie.parishApp.main.MainApp</main.class>
+    <app.name>ParishManagementSystem</app.name>
     <app.version>1.0.0</app.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jpackage.plugin.version>1.6.5</jpackage.plugin.version>
@@ -153,6 +154,17 @@
             <artifactId>aspectjrt</artifactId>
             <version>1.9.19</version>
         </dependency>
+        <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-core</artifactId>
+          <version>6.4.1</version>
+       </dependency>
+       <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-config</artifactId>
+          <version>6.4.1</version>
+        </dependency>
+        
   </dependencies>
 
   <build>
@@ -253,7 +265,7 @@
                   <name>${app.name}</name>
                   <appVersion>${app.version}</appVersion>
                    <jlink>false</jlink>
-                  <vendor>Ananie Musha Parish</vendor>
+                  <vendor>Ananie </vendor>
                   <destination>target/dist</destination>
                   <input>target</input>
                   <mainJar>${app.name}-${app.version}-fat.jar</mainJar>
